@@ -1,108 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DKCR4NEWST"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DKCR4NEWST');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUPER SS</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tap the Box Game</title>
+<style>
+  body {
+    margin: 0;
+    background: #222;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    text-align: center;
+  }
+  h1 {
+    margin: 10px 0;
+  }
+  #gameArea {
+    position: relative;
+    width: 100vw;
+    height: 80vh;
+    background: #333;
+    border: 2px solid #444;
+    margin: auto;
+    overflow: hidden;
+  }
+  #box {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: red;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  #score {
+    font-size: 1.5em;
+  }
+  #timer {
+    font-size: 1.2em;
+    margin-top: 5px;
+  }
+  #startBtn {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    margin-top: 15px;
+    cursor: pointer;
+    border: none;
+    background: limegreen;
+    color: white;
+    border-radius: 6px;
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>SAMARTH SUPER APPLET</h1>
-    </header>
 
-    <div class="container">
-        <div class="box" onclick="location.href='snake1.html'">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3HNuKptVKi3_XdVHLuIbRerGZQ64R4SrZtA&usqp=CAU" alt="Snake Game">
-            <div class="content">LEGENDS OF SNAKE</div>
-        </div>
-        <div class="box" onclick="location.href='egg2.html'">
-            <img src="https://png.pngtree.com/png-vector/20190615/ourmid/pngtree-egg-icon-png-image_1501637.jpg" alt="Egg Challenge">
-            <div class="content">EGG FIGHT</div>
-        </div>
-        <div class="box" onclick="location.href='notes3.html'">
-            <img src="https://static.vecteezy.com/system/resources/previews/021/351/746/non_2x/calender-icon-for-your-website-mobile-presentation-and-logo-design-free-vector.jpg" alt="CALENDER">
-            <div class="content">CALENDER</div>
-        </div>
-        <div class="box" onclick="location.href='search4.html'">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4FNj-7wuP85KniXWKNOlYDBUG92fxl9jhCg&s" alt="Game 4">
-            <div class="content">SEARCH 1.0</div>
-        </div>
-        <div class="box" onclick="location.href='flappy5.html'">
-            <img src="https://cdn4.iconfinder.com/data/icons/logos-3/504/Swift-2-512.png" alt="Game 5">
-            <div class="content">FLAPPY GUY</div>
-        </div>
-        <div class="box" onclick="location.href='galaxy6.html'">
-            <img src="https://plus.unsplash.com/premium_photo-1720720425219-b903f7b367d3?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Z2FsYXh5JTIwd2FsbHBhcGVyfGVufDB8fDB8fHww" alt="Game 6">
-            <div class="content">GALAXY WORLD</div>
-        </div>
-        <div class="box" onclick="location.href='car7.html'">
-            <img src="https://static.vecteezy.com/system/resources/previews/043/213/057/non_2x/car-logo-against-red-and-blue-background-design-a-sleek-emblem-for-an-automotive-repair-business-minimalist-simple-modern-logo-design-free-vector.jpg" alt="Game 7">
-            <div class="content">POLICE CHASE</div>
-        </div>
-        <div class="box" onclick="location.href='type8.html'">
-            <img src="https://static.vecteezy.com/system/resources/previews/009/120/465/non_2x/one-logo-one-letter-one-letter-logo-design-initials-one-logo-linked-with-circle-and-uppercase-monogram-logo-one-typography-for-technology-business-and-real-estate-brand-vector.jpg" alt="Game 8">
-            <div class="content">TYPE WRITER</div>
-        </div>
-        <div class="box" onclick="location.href='runner9.html'">
-            <img src="https://www.creativefabrica.com/wp-content/uploads/2022/11/10/Runner-athlete-icon-logo-design-Graphics-45916060-1.jpg" alt="Game 9">
-            <div class="content">RUNNER</div>
-        </div>
-        <div class="box" onclick="location.href='imagine10.html'">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr4Go3jV5NQO7z2wTXRZKbMWhWNV-bFy2STA&s" alt="Game 10">
-            <div class="content">IMAGINE</div>
-        </div>
-        <div class="box" onclick="location.href='game11.html'">
-            <img src="https://via.placeholder.com/100" alt="Game 11">
-            <div class="content">GAME 11</div>
-        </div>
-        <div class="box" onclick="location.href='game12.html'">
-            <img src="https://via.placeholder.com/100" alt="Game 12">
-            <div class="content">GAME 12</div>
-        </div>
-        <div class="box" onclick="location.href='game13.html'">
-            <img src="https://via.placeholder.com/100" alt="Game 13">
-            <div class="content">GAME 13</div>
-        </div>
-        <div class="box" onclick="location.href='game14.html'">
-            <img src="https://via.placeholder.com/100" alt="Game 14">
-            <div class="content">GAME 14</div>
-        </div>
-        <div class="box" onclick="location.href='game15.html'">
-            <img src="https://via.placeholder.com/100" alt="Game 15">
-            <div class="content">GAME 15</div>
-        </div>
-        <div class="box" onclick="location.href='game16.html'">
-            <img src="https://via.placeholder.com/100" alt="Game 16">
-            <div class="content">GAME 16</div>
-        </div>
-        <div class="box" onclick="location.href='game17.html'">
-            <img src="https://via.placeholder.com/100" alt="Game 17">
-            <div class="content">GAME 17</div>
-        </div>
-        <div class="box" onclick="location.href='game18.html'">
-            <img src="https://via.placeholder.com/100" alt="Game 18">
-            <div class="content">GAME 18</div>
-        </div>
-        <div class="box" onclick="location.href='game19.html'">
-            <img src="https://via.placeholder.com/100" alt="Game 19">
-            <div class="content">GAME 19</div>
-        </div>
-        <div class="box" onclick="location.href='game20.html'">
-            <img src="https://via.placeholder.com/100" alt="Game 20">
-            <div class="content">GAME 20</div>
-        </div>        
-    </div>
+<h1>Tap the Box!</h1>
+<div id="score">Score: 0</div>
+<div id="timer">Time Left: 20</div>
+<button id="startBtn" onclick="startGame()">Start Game</button>
+
+<div id="gameArea">
+  <div id="box" onclick="hitBox()" style="display:none;"></div>
+</div>
+
+<script>
+let score = 0;
+let timeLeft = 20;
+let gameInterval, timerInterval;
+
+function startGame() {
+  score = 0;
+  timeLeft = 20;
+  document.getElementById("score").innerText = "Score: " + score;
+  document.getElementById("timer").innerText = "Time Left: " + timeLeft;
+  document.getElementById("box").style.display = "block";
+  moveBox();
+
+  // Timer
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = "Time Left: " + timeLeft;
+    if (timeLeft <= 0) endGame();
+  }, 1000);
+
+  // Move box every 700ms
+  gameInterval = setInterval(moveBox, 700);
+}
+
+function moveBox() {
+  const box = document.getElementById("box");
+  const gameArea = document.getElementById("gameArea");
+  const maxX = gameArea.clientWidth - box.offsetWidth;
+  const maxY = gameArea.clientHeight - box.offsetHeight;
+  const x = Math.floor(Math.random() * maxX);
+  const y = Math.floor(Math.random() * maxY);
+  box.style.left = x + "px";
+  box.style.top = y + "px";
+}
+
+function hitBox() {
+  score++;
+  document.getElementById("score").innerText = "Score: " + score;
+  moveBox();
+}
+
+function endGame() {
+  clearInterval(gameInterval);
+  clearInterval(timerInterval);
+  document.getElementById("box").style.display = "none";
+  alert("Game Over! Your score: " + score);
+}
+</script>
 
 </body>
 </html>
-
