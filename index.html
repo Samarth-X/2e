@@ -1,116 +1,156 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tap the Box Game</title>
-<style>
-  body {
-    margin: 0;
-    background: #222;
-    color: white;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-    text-align: center;
-  }
-  h1 {
-    margin: 10px 0;
-  }
-  #gameArea {
-    position: relative;
-    width: 100vw;
-    height: 80vh;
-    background: #333;
-    border: 2px solid #444;
-    margin: auto;
-    overflow: hidden;
-  }
-  #box {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background: red;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  #score {
-    font-size: 1.5em;
-  }
-  #timer {
-    font-size: 1.2em;
-    margin-top: 5px;
-  }
-  #startBtn {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    margin-top: 15px;
-    cursor: pointer;
-    border: none;
-    background: limegreen;
-    color: white;
-    border-radius: 6px;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2e</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: radial-gradient(1200px 800px at 10% 10%, #2dd4bf30 0%, #0ea5e920 40%, #8b5cf620 70%, #000 100%),
+            linear-gradient(135deg, #0f172a 0%, #020617 60%);
+      --glass: linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.06));
+      --stroke: rgba(255,255,255,.14);
+      --glow: 0 10px 30px rgba(59,130,246,.35), inset 0 0 0 1px rgba(255,255,255,.06);
+      --brand: #60a5fa;
+      --brand2:#22d3ee;
+      --text:#E6EDF6;
+      --muted:#9AA4B2;
+    }
+    *{box-sizing:border-box; margin:0; padding:0}
+    html,body{height:100%; scroll-behavior:smooth}
+    body{
+      font-family: Outfit, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      color:var(--text); background: var(--bg); overflow-x:hidden;
+    }
+
+    /* Smooth entry animations */
+    .fade-in{opacity:0; transform:translateY(20px); animation:fadeUp .8s forwards}
+    @keyframes fadeUp{to{opacity:1; transform:translateY(0)}}
+
+    .shell{min-height:100%; padding: clamp(16px, 3vw, 32px);} 
+    .header{display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:32px; text-align:center}
+    .logo{display:grid; place-items:center; width:64px; height:64px; border-radius:20px; background:var(--glass);
+      backdrop-filter: blur(14px); box-shadow: var(--glow); border:1px solid var(--stroke); animation: float 4s ease-in-out infinite;}
+    .logo span{font-weight:800; font-size:16px; background: linear-gradient(90deg, var(--brand), var(--brand2)); -webkit-background-clip:text; color:transparent}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+    h1.title{font-size: clamp(28px, 5vw, 56px); letter-spacing:.5px; line-height:1.1;
+      background: linear-gradient(90deg, #fff, #93c5fd 40%, #22d3ee 70%, #a78bfa);
+      -webkit-background-clip:text; color:transparent;
+      filter: drop-shadow(0 10px 24px rgba(59,130,246,.25));
+    }
+    .subtitle{margin-top:6px; font-size:15px; color:var(--muted)}
+
+    .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(16px, 2.5vw, 28px); max-width:1200px; margin: 0 auto;}
+
+    .card{
+      position:relative; overflow:hidden; border-radius:28px; padding:24px; min-height:200px; cursor:pointer;
+      background: var(--glass); border:1px solid var(--stroke); box-shadow: var(--glow);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      isolation:isolate; backdrop-filter: blur(12px);
+    }
+    .card:hover{ transform: translateY(-6px) scale(1.02); box-shadow: 0 25px 70px rgba(56,189,248,.25), inset 0 0 0 1px rgba(255,255,255,.16); border-color: rgba(255,255,255,.22) }
+    .card:active{ transform: scale(.98) }
+
+    .card .ink{ position:absolute; inset:-40%; background:
+      radial-gradient(360px 280px at 20% 30%, rgba(96,165,250,.25), transparent 60%),
+      radial-gradient(240px 200px at 80% 20%, rgba(34,211,238,.28), transparent 60%),
+      radial-gradient(360px 280px at 60% 80%, rgba(167,139,250,.22), transparent 65%);
+      filter: blur(28px); z-index:0; animation: pulse 6s infinite alternate ease-in-out;
+    }
+    @keyframes pulse{0%{opacity:.6}100%{opacity:1}}
+
+    .card h2{ position:relative; z-index:1; margin:12px 0 6px; font-size: clamp(22px, 3vw, 30px); font-weight:600; }
+    .card p{ position:relative; z-index:1; margin:0; color:var(--muted); line-height:1.4 }
+    .badge{ position:absolute; right:18px; top:18px; z-index:1; font-size:12px; padding:6px 12px; border-radius:999px; background:rgba(34,211,238,.15); border:1px solid rgba(34,211,238,.35)}
+
+    .footer{padding:16px; text-align:center; color:var(--muted); font-size:13px; margin-top:40px}
+  </style>
 </head>
 <body>
+  <div class="shell">
+    <header class="header fade-in">
+      <div class="logo"><span>XS</span></div>
+      <h1 class="title">XS SUPER APP</h1>
+      <div class="subtitle">• Pick a game to play • SAMARTH • Built for you ✨</div>
+    </header>
 
-<h1>Tap the Box!</h1>
-<div id="score">Score: 0</div>
-<div id="timer">Time Left: 20</div>
-<button id="startBtn" onclick="startGame()">Start Game</button>
+    <main class="grid fade-in" style="animation-delay:.2s">
+      <article class="card" onclick="location.href='snake1.html'">
+        <div class="ink"></div>
+        <span class="badge">Arcade</span>
+        <h2>LEGENDS OF SNAKE</h2>
+        <p>Classic snake with smooth controls, score & speed ups.</p>
+      </article>
 
-<div id="gameArea">
-  <div id="box" onclick="hitBox()" style="display:none;"></div>
-</div>
+      <article class="card" onclick="location.href='egg2.html'">
+        <div class="ink"></div>
+        <span class="badge">Action</span>
+        <h2>EGG FIGHT</h2>
+        <p>Funny egg battle challenge for quick reflexes.</p>
+      </article>
 
-<script>
-let score = 0;
-let timeLeft = 20;
-let gameInterval, timerInterval;
+      <article class="card" onclick="location.href='notes3.html'">
+        <div class="ink"></div>
+        <span class="badge">Utility</span>
+        <h2>CALENDER</h2>
+        <p>Plan and manage events with ease.</p>
+      </article>
 
-function startGame() {
-  score = 0;
-  timeLeft = 20;
-  document.getElementById("score").innerText = "Score: " + score;
-  document.getElementById("timer").innerText = "Time Left: " + timeLeft;
-  document.getElementById("box").style.display = "block";
-  moveBox();
+      <article class="card" onclick="location.href='search4.html'">
+        <div class="ink"></div>
+        <span class="badge">Tool</span>
+        <h2>SEARCH 1.0</h2>
+        <p>Find anything instantly with smart search.</p>
+      </article>
 
-  // Timer
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    document.getElementById("timer").innerText = "Time Left: " + timeLeft;
-    if (timeLeft <= 0) endGame();
-  }, 1000);
+      <article class="card" onclick="location.href='flappy5.html'">
+        <div class="ink"></div>
+        <span class="badge">Arcade</span>
+        <h2>FLAPPY GUY</h2>
+        <p>Tap to fly and dodge obstacles for a high score.</p>
+      </article>
 
-  // Move box every 700ms
-  gameInterval = setInterval(moveBox, 700);
-}
+      <article class="card" onclick="location.href='galaxy6.html'">
+        <div class="ink"></div>
+        <span class="badge">Action</span>
+        <h2>GALAXY WORLD</h2>
+        <p>Defeat alien ships in endless galaxy battles.</p>
+      </article>
 
-function moveBox() {
-  const box = document.getElementById("box");
-  const gameArea = document.getElementById("gameArea");
-  const maxX = gameArea.clientWidth - box.offsetWidth;
-  const maxY = gameArea.clientHeight - box.offsetHeight;
-  const x = Math.floor(Math.random() * maxX);
-  const y = Math.floor(Math.random() * maxY);
-  box.style.left = x + "px";
-  box.style.top = y + "px";
-}
+      <article class="card" onclick="location.href='car7.html'">
+        <div class="ink"></div>
+        <span class="badge">Racing</span>
+        <h2>POLICE CHASE</h2>
+        <p>Outrun cops in this thrilling car chase.</p>
+      </article>
 
-function hitBox() {
-  score++;
-  document.getElementById("score").innerText = "Score: " + score;
-  moveBox();
-}
+      <article class="card" onclick="location.href='type8.html'">
+        <div class="ink"></div>
+        <span class="badge">Typing</span>
+        <h2>TYPE WRITER</h2>
+        <p>Improve your typing speed with fun challenges.</p>
+      </article>
 
-function endGame() {
-  clearInterval(gameInterval);
-  clearInterval(timerInterval);
-  document.getElementById("box").style.display = "none";
-  alert("Game Over! Your score: " + score);
-}
-</script>
+      <article class="card" onclick="location.href='runner9.html'">
+        <div class="ink"></div>
+        <span class="badge">Adventure</span>
+        <h2>RUNNER</h2>
+        <p>Keep running and avoid obstacles endlessly.</p>
+      </article>
 
+      <article class="card" onclick="location.href='imagine10.html'">
+        <div class="ink"></div>
+        <span class="badge">Puzzle</span>
+        <h2>IMAGINE</h2>
+        <p>Slide the tiles into order. Clean & solvable.</p>
+      </article>
+    </main>
+
+    <div class="footer fade-in" style="animation-delay:.4s">© SAMARTH 2025</div>
+  </div>
 </body>
 </html>
